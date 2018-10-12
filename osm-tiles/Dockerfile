@@ -38,6 +38,10 @@ RUN chown -R www-data.www-data /usr/local/src/
 RUN rm -rf /var/www/html
 ADD leafletjs-localmap /var/www/html
 
+# Fix osm-bright "populated places" bug
+RUN mkdir /usr/local/src/osm-bright/shp/ne_10m_populated_places
+ADD seed-data/ne_10m_populated_places /usr/local/src/osm-bright/shp/ne_10m_populated_places
+
 # Configure renderd
 ADD renderd.conf /usr/local/etc/renderd.conf
 RUN install --owner=www-data --group=www-data -d /var/run/renderd
